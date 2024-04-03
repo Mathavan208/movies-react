@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Pagination from './pagination';
 import {pagination} from './utils/pagination';
+import ListGroup from './listGroup';
 class Movies extends Component {
     constructor(){
         super();
@@ -17,9 +18,13 @@ class Movies extends Component {
                                     {name:"vikram",genre:"action",stock:7,rating:5},
                                                 {name:"vikram",genre:"action",stock:7,rating:5}
         ],
+        genres:[],
         pageSize:4,
         currentpage:1
     };
+    componentDidMount(){
+        this.setState({genres:['action','drama','thriller']});
+    }
 
     styles = {
         color:"red"
@@ -40,8 +45,13 @@ deletemovie(movie){
             const {movies,pageSize,currentpage}=this.state;
             const movies1=pagination(movies,currentpage,pageSize);
         return (
-            <React.Fragment>
-                <h5 style={this.styles}>{this.display()}</h5>
+            <div className="row">
+            <div className="col-3">
+<ListGroup genres={this.state.genres} movies={this.state.movies}/>
+
+            </div>
+            <div className="col">
+                {this.display()}
                 <table className="table">
                     <thead>
                         <tr>
@@ -64,7 +74,8 @@ deletemovie(movie){
                     </tbody>
                 </table>
                     <Pagination length={movies.length} pagesize={pageSize} pagedisplay={this.handlepage} currpage={currentpage}/>
-            </React.Fragment>
+            </div>
+            </div>
         );
     }
 }
