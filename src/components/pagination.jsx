@@ -13,7 +13,7 @@ class Pagination extends Component {
   }
 
   render() {
-    console.log(this.props.currpage);
+   // console.log(this.props.currpage);
     const { pages } = this.state;
         if (this.pagecount === 1) return null;
 

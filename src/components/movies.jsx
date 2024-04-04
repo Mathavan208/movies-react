@@ -8,6 +8,7 @@ class Movies extends Component {
         this.deletemovie=this.deletemovie.bind(this);
         this.display=this.display.bind(this);
         this.handlepage=this.handlepage.bind(this);
+        this.handlegenre=this.handlegenre.bind(this);
     }
     state = {
         movies: [
@@ -20,7 +21,8 @@ class Movies extends Component {
         ],
         genres:[],
         pageSize:4,
-        currentpage:1
+        currentpage:1,
+        currentgenre:'action'
     };
     componentDidMount(){
         this.setState({genres:['action','drama','thriller']});
@@ -33,11 +35,14 @@ class Movies extends Component {
  this.setState({currentpage:page});
 
     }
+    handlegenre(genre){
+        this.setState({currentgenre:genre});
+    }
     display(){
  return this.state.movies.length!==0?<h1>movies count:{this.state.movies.length}</h1>:<h1>no movies listed</h1>
     }
 deletemovie(movie){
-    console.log(this.state.movies.indexOf(movie))
+    //console.log(this.state.movies.indexOf(movie))
      const updatedMovies = this.state.movies.filter(m => m !== movie);
      this.setState({movies:updatedMovies});
 }
@@ -47,7 +52,7 @@ deletemovie(movie){
         return (
             <div className="row">
             <div className="col-3">
-<ListGroup genres={this.state.genres} movies={this.state.movies}/>
+<ListGroup genres={this.state.genres} currentgenre={this.state.currentgenre} clickgenre={this.handlegenre} movies={this.state.movies}/>
 
             </div>
             <div className="col">
