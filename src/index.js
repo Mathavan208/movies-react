@@ -5,17 +5,25 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.css';
+import Navigation from './components/navigation';
 import Movies from './components/movies';
-
+import Home from './components/home';
+import { Route, BrowserRouter as Router,Routes } from 'react-router-dom';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  <Router>
   <React.StrictMode>
-  <div className="container">
-  
-  
-    <Movies />
+  <div className="container-fluid">
+    <Navigation />
+  <div className='content'>
+  <Routes> {/* Wrap your Routes with the Routes component */}
+  <Route path='/' element={<Home />} />
+            <Route path='/movies' element={<Movies />} /> {/* Use the 'element' prop instead of 'component' */}
+          </Routes>
+    </div>
     </div>
   </React.StrictMode>
+  </Router>
 );
 
 // If you want to start measuring performance in your app, pass a function
